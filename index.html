@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something Special Awaits</title>
+
+  <!-- Algerian Font -->
+  <style>
+    @font-face {
+      font-family: 'Algerian';
+      src: local('Algerian');
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #2b1055, #000);
+      font-family: 'Algerian', 'Times New Roman', serif;
+      color: white;
+    }
+
+    section {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    section.active { display: flex; }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin-bottom: 30px;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff9ff3; }
+      to { text-shadow: 0 0 30px #f368e0, 0 0 50px #ee5253; }
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff6b81, #f368e0);
+      color: white;
+      box-shadow: 0 10px 25px rgba(255,107,129,0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 35px rgba(243,104,224,0.8);
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: #ff6b81;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Falling petals */
+    .petal {
+      position: absolute;
+      top: -20px;
+      color: #ffd1dc;
+      animation: fall linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    }
+
+    img {
+      width: 200px;
+      border-radius: 20px;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    #qr img { width: 220px; }
+  </style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<section id="page1" class="active">
+  <h1>Something Special Awaits<br>for a Most Special Girl</h1>
+  <button onclick="nextPage('page2')">Click Me</button>
+</section>
+
+<!-- Page 2 -->
+<section id="page2">
+  <h1>✨ My Dear Anuu ✨</h1>
+  <p>You are the most beautiful chapter of my life. Every smile of yours is my happiness.</p>
+  <button onclick="nextPage('page3')">Next</button>
+</section>
+
+<!-- Page 3 -->
+<section id="page3">
+  <h1>From My Heart ❤️</h1>
+  <p>
+    You make ordinary moments magical. Your presence turns my world brighter, warmer, and happier.
+    This is just a small way to tell you how special you are to me.
+  </p>
+  <button onclick="nextPage('page4')">Surprise</button>
+</section>
+
+<!-- Page 4 -->
+<!-- Page 4 -->
+<section id="page4">
+  <h1>Our Memories 🌸</h1>
+  <div>
+    <img src="https://img.freepik.com/premium-photo/cute-teddy-bear-with-heart-love-valentine-s-day-card-3d-render-illustration_691560-7233.jpg?w=2000"
+      onclick="window.open('memory1.html','_blank')">
+
+    <img src="insta1.jpeg" width="200"
+         onclick="window.open('memory2.html','_blank')" />
+
+    <img src="insta2.jpeg" width="200"
+         onclick="window.open('memory3.html','_blank')" />
+  </div>
+  <button onclick="nextPage('page5')">One More Thing</button>
+</section>
+
+
+<!-- Memory Detail Pages -->
+<section id="memory1">
+  <h1>💖 Memory One</h1>
+  <p>This moment will always stay close to my heart. Your smile made this day unforgettable.</p>
+  <button onclick="nextPage('page4')">Back to Memories</button>
+</section>
+
+<section id="memory2">
+  <h1>🌸 Memory Two</h1>
+  <p>Every laugh we shared here still echoes in my soul. Thank you for being you.</p>
+  <button onclick="nextPage('page4')">Back to Memories</button>
+</section>
+
+<section id="memory3">
+  <h1>✨ Memory Three</h1>
+  <p>This picture reminds me how lucky I am to have you in my life.</p>
+  <button onclick="nextPage('page4')">Back to Memories</button>
+</section>
+
+<!-- Page 5 -->
+<section id="page5">
+  <h1>Will You Always Stay With Me? </h1>
+  <p>You are my all time  and my forever bestie.</p>
+  <button onclick="nextPage('qr')"> Thank You</button>
+</section>
+<!-- Background Music -->
+ <audio id="music" loop>
+  <source src="reel audio.mpeg" type="audio/mpeg">
+</audio>
+<script>
+  function nextPage(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    // play music on first click
+    const music = document.getElementById("music");
+    if (music.paused) {
+      music.play();
+    }
+  }
+
+
+
+  // Floating hearts
+  setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = '❤';
+    h.style.left = Math.random()*100+'vw';
+    h.style.fontSize = Math.random()*20+15+'px';
+    h.style.animationDuration = Math.random()*3+4+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
+  },300);
+
+  // Falling petals
+  setInterval(() => {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.innerHTML = '❀';
+    p.style.left = Math.random()*100+'vw';
+    p.style.animationDuration = Math.random()*5+6+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),8000);
+  },700);
+</script>
+
+</body>
+</html>
